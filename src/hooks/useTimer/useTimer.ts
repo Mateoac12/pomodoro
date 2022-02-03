@@ -1,4 +1,11 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 interface CounterValues {
   minutes: number
@@ -21,7 +28,50 @@ export const useTimer = () => {
     })
   }, [])
 
+  // if the first component render, I won't start the tracker, only when the user click on the button
   const isInitialRender = useRef(true)
+
+  // variables to control the timer when the browser is minimized
+  const timeInPause = useRef(0)
+  const currentTime = useRef(0)
+
+  const newTimeToUse = useRef(counter as CounterValues)
+
+  const isBrowserHidden = useMemo(() => document.hidden, [document.hidden])
+
+  useEffect(() => {
+    if (isInitialRender.current) return
+
+    if (isBrowserHidden) {
+      timeInPause.current = new Date().getTime()
+      clearInterval(interval)
+
+      newTimeToUse.current = { ...counter }
+    } else {
+      currentTime.current = new Date().getTime()
+      let timeLapse = Math.trunc(
+        (currentTime.current - timeInPause.current) / 1000
+      )
+
+      while (timeLapse > 0) {
+        if (timeLapse >= 60) {
+          newTimeToUse.current.minutes -= 1
+          timeLapse -= 60
+        } else {
+          if (newTimeToUse.current.seconds - timeLapse <= 0) {
+            newTimeToUse.current.minutes -= 1
+            newTimeToUse.current.seconds =
+              60 - (timeLapse - newTimeToUse.current.seconds)
+          } else {
+            newTimeToUse.current.seconds -= timeLapse
+          }
+          timeLapse = 0
+        }
+      }
+
+      setCounter(newTimeToUse.current)
+    }
+  }, [isBrowserHidden])
 
   useEffect(() => {
     if (isInitialRender.current) {
@@ -31,8 +81,8 @@ export const useTimer = () => {
 
     const { minutes, seconds } = counter
 
-    const endSecond = seconds === 0
-    const endMinute = minutes === 0
+    const endSecond = seconds <= 0
+    const endMinute = minutes <= 0
 
     interval = setTimeout(() => {
       setCounter((prev) => ({
