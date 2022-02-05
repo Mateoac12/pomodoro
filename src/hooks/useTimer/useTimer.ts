@@ -49,7 +49,7 @@ export const useTimer = () => {
       newTimeToUse.current = { ...counter }
     } else {
       currentTime.current = new Date().getTime()
-      let timeLapse = Math.trunc(
+      let timeLapse = Math.ceil(
         (currentTime.current - timeInPause.current) / 1000
       )
 
