@@ -1,16 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { calculateCicrleDash } from 'utils/calculateCircleDash'
 
 interface Props {
   minutes: number
   seconds: number
+  isWorkTime: boolean
 }
 
-const CircleTracker = ({ minutes, seconds }: Props) => {
+const CircleTracker = ({ minutes, seconds, isWorkTime }: Props) => {
   const [circleDash, setCircleDash] = useState<string>('283')
+  const totalSeconds = useMemo(() => minutes * 60 || 60, [isWorkTime])
 
   useEffect(() => {
-    const { circleTime } = calculateCicrleDash({ minutes, seconds })
+    const { circleTime } = calculateCicrleDash({
+      minutes,
+      seconds,
+      totalSeconds,
+    })
 
     setCircleDash(`${(circleTime * 283).toFixed(0)} 283`)
   }, [seconds, minutes])
@@ -23,7 +29,11 @@ const CircleTracker = ({ minutes, seconds }: Props) => {
         transform: 'scale(1.15)',
       }}
     >
-      <g fill="none" stroke="none" className="text-orange-200">
+      <g
+        fill="none"
+        stroke="none"
+        className={isWorkTime ? 'text-orange-200' : 'text-green-300'}
+      >
         <circle
           strokeWidth={4}
           stroke="#E5E7EB"
