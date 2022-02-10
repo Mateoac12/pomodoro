@@ -15,7 +15,6 @@ export const handleLogin = () => {
     isSignedIn: true,
   } as GoogleLoginProps)
 
-  console.log('handlelogin => ejecutado')
   function onSuccess(res: GoogleLoginResponse) {
     const { profileObj, tokenId } = res
     const { name, imageUrl, email } = profileObj
