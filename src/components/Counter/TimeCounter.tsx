@@ -5,9 +5,10 @@ interface Props {
   minutes: number
   seconds: number
   isWorkTime: boolean
+  maxTime: number
 }
 
-const TimeCounter = ({ minutes, seconds, isWorkTime }: Props) => {
+const TimeCounter = ({ minutes, seconds, isWorkTime, maxTime }: Props) => {
   return (
     <div className="relative m-8">
       <div className="relative z-40 shadow-lg bg-slate-50 flex flex-col items-center justify-center p-20 rounded-full w-96 h-96">
@@ -27,6 +28,7 @@ const TimeCounter = ({ minutes, seconds, isWorkTime }: Props) => {
         </span>
       </div>
       <CircleTracker
+        maxTime={maxTime}
         minutes={minutes}
         seconds={seconds}
         isWorkTime={isWorkTime}
