@@ -5,11 +5,12 @@ interface Props {
   minutes: number
   seconds: number
   isWorkTime: boolean
+  maxTime: number
 }
 
-const CircleTracker = ({ minutes, seconds, isWorkTime }: Props) => {
+const CircleTracker = ({ minutes, seconds, isWorkTime, maxTime }: Props) => {
   const [circleDash, setCircleDash] = useState<string>('283')
-  const totalSeconds = useMemo(() => minutes * 60 || 60, [isWorkTime])
+  const totalSeconds = useMemo(() => maxTime * 60 || 60, [isWorkTime])
 
   useEffect(() => {
     const { circleTime } = calculateCicrleDash({

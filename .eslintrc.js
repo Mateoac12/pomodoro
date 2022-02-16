@@ -23,5 +23,6 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': RULES.OFF,
     'react/prop-types': RULES.OFF,
+    'no-use-before-define': RULES.OFF,
   },
 }
