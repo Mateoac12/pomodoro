@@ -1,6 +1,7 @@
 import Counter from 'components/Counter'
 import MethodologyHomeTag from 'components/MethodologyHomeTag'
 import Navbar from 'components/Navbar'
+import ProgressBar from 'components/ProgressBar'
 import TimerProvider from 'context/TimerContext'
 import { AnimatePresence } from 'framer-motion'
 import ConfigPanelPage from 'pages/ConfigPanelPage'
@@ -15,6 +16,7 @@ function App() {
         <div className="flex flex-col flex-1 relative items-start justify-start w-full h-screen">
           <div className="absolute flex gap-4 items-center w-full p-8">
             <MethodologyHomeTag />
+            <ProgressBar />
           </div>
           <Counter />
         </div>
