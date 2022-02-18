@@ -60,7 +60,7 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
         minutes: isLastStep ? resetTime.time : rules.time,
         seconds: 0,
         maxTime: isLastStep ? resetTime.time : rules.time,
-        laps: isLastStep && prevStatus.laps + 1,
+        laps: isLastStep ? prevStatus.laps + 1 : 0,
       }
 
       return newTimer
