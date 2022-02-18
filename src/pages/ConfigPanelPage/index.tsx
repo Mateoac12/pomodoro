@@ -15,13 +15,12 @@ const ConfigPanelPage = () => {
         <p className="mt-4 text-xl p-2 mb-4">Elige tu Metodología</p>
         <form>
           {trackerOptions.map(({ id, name }) => (
-            <>
+            <div key={`methodology-${id}-card`}>
               <input
                 type="radio"
                 name="methodology"
                 value={id}
                 id={`methodology-${id}`}
-                key={`methodology-${id}-card`}
                 className={`hidden peer`}
                 onClick={() => handleSetMehod(id)}
               />
@@ -35,7 +34,7 @@ const ConfigPanelPage = () => {
                 <h1 className="text-2xl pb-2 mb-2">{name}</h1>
                 <PomodoroListOptions methodId={id} />
               </label>
-            </>
+            </div>
           ))}
         </form>
       </div>
