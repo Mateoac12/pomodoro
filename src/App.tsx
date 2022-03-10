@@ -3,9 +3,6 @@ import MethodologyHomeTag from 'components/MethodologyHomeTag'
 import Navbar from 'components/Navbar'
 import ProgressBar from 'components/ProgressBar'
 import TimerProvider from 'context/TimerContext'
-import { AnimatePresence } from 'framer-motion'
-import ConfigPanelPage from 'pages/ConfigPanelPage'
-import { Route } from 'wouter'
 import './App.css'
 
 function App() {
@@ -19,11 +16,6 @@ function App() {
             <ProgressBar />
           </div>
           <Counter />
-        </div>
-        <div>
-          <AnimatePresence>
-            <Route path="/config" component={ConfigPanelPage} />
-          </AnimatePresence>
         </div>
       </div>
     </TimerProvider>
