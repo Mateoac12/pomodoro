@@ -6,8 +6,14 @@ const NavbarOptions = () => {
     <>
       <div className="mt-20 flex-1">
         <ul>
-          {navbarOptions.map(({ id, name, url }) => (
-            <NavbarItem key={name} id={id} name={name} url={url} />
+          {navbarOptions.map(({ id, name, url, handlerName }) => (
+            <NavbarItem
+              key={name}
+              id={id}
+              name={name}
+              url={url}
+              handlerName={handlerName}
+            />
           ))}
         </ul>
       </div>
