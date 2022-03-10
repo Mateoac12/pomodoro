@@ -1,7 +1,8 @@
 export interface NavbarOptions {
   id: number
   name: string
-  url: string
+  url?: string
+  handlerName?: 'config' | 'panel'
 }
 
 export interface TrackerOptions {
@@ -31,7 +32,7 @@ export const navbarOptions: NavbarOptions[] = [
   {
     id: 2,
     name: 'Configuración',
-    url: '/config',
+    handlerName: 'config',
   },
 ]
 
