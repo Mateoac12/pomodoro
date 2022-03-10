@@ -20,7 +20,7 @@ const PomodoroHelp = ({ methodId }: Props) => {
       exit={{
         opacity: 0,
       }}
-      className="absolute top-full my-1 pb-0 w-80 bg-white rounded-md shadow-xl overflow-hidden"
+      className="absolute top-full my-1 pb-0 w-80 bg-white rounded-md shadow-xl overflow-hidden z-40"
     >
       <div className="p-2">
         <PomodoroListOptions methodId={methodId} />

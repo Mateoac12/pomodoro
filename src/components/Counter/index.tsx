@@ -13,19 +13,21 @@ const Counter = () => {
     useTimerControl({ playNotification })
 
   return (
-    <div className="relative bg-stone-50 border flex flex-col mx-auto my-auto rounded-full shadow-md">
-      <TimeCounter
-        maxTime={maxTime}
-        minutes={minutes}
-        seconds={seconds}
-        isWorkTime={isWorkTime}
-      />
-      {isRunning ? (
-        <PauseButton pause={pause} />
-      ) : (
-        <PlayButton resume={resume} />
-      )}
-    </div>
+    <>
+      <div className="relative bg-stone-50 border flex flex-col mx-auto my-20 mb-40 lg:mb-auto lg:my-auto rounded-full shadow-md">
+        <TimeCounter
+          maxTime={maxTime}
+          minutes={minutes}
+          seconds={seconds}
+          isWorkTime={isWorkTime}
+        />
+        {isRunning ? (
+          <PauseButton pause={pause} />
+        ) : (
+          <PlayButton resume={resume} />
+        )}
+      </div>
+    </>
   )
 }
 
