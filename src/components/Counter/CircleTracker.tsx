@@ -25,7 +25,7 @@ const CircleTracker = ({ minutes, seconds, isWorkTime, maxTime }: Props) => {
   return (
     <svg
       viewBox="0 0 100 100"
-      className="absolute top-0 left-0 w-96 h-96"
+      className="absolute top-0 left-0 w-72 h-72 lg:w-96 lg:h-96"
       style={{
         transform: 'scale(1.15)',
       }}

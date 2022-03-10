@@ -9,7 +9,7 @@ const LoginPanel = () => {
   if (!loaded) return <LoadingUser />
 
   return (
-    <div className="p-8 border-t">
+    <div className="px-2 py-4 lg:px-8 lg:py-8 border-t">
       {user && !isLogout ? (
         <UserData name={user.name} imageUrl={user.imageUrl} signOut={signOut} />
       ) : (

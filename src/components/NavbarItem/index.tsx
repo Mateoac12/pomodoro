@@ -11,7 +11,7 @@ interface Props extends NavbarOptions {}
 const NavbarItem = ({ id, name, url, handlerName }: Props) => {
   const [show, setShow] = useState<boolean>(false)
   const classNames = useRef(
-    'w-full block px-8 py-4 box-border text-2xl hover:bg-orange-100 hover:text-orange-600 hover:border-r-4 hover:border-orange-400 text-left'
+    'w-full block px-2 py-2 lg:px-8 lg:py-4 box-border text-xl lg:text-2xl hover:bg-orange-100 hover:text-orange-600 hover:border-r-4 hover:border-orange-400 text-left'
   )
 
   const handleControlAction = useCallback(

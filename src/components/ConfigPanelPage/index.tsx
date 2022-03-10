@@ -7,7 +7,7 @@ const ConfigPanelPage = () => {
   const { handleSetMehod, methodId } = useTimerControl()
 
   return (
-    <motion.div className="top-0 right-0 bg-white h-screen w-96 shadow-md">
+    <motion.div className="top-0 right-0 bg-white h-auto lg:h-screen w-80 lg:w-96 shadow-md">
       <h1 className="text-center text-xl border-b py-2 font-semibold text-white bg-gradient-to-r from-rose-400 to-orange-300">
         Configuración
       </h1>

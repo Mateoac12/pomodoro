@@ -4,7 +4,7 @@ import { navbarOptions } from 'config/navbarOptions'
 const NavbarOptions = () => {
   return (
     <>
-      <div className="mt-20 flex-1">
+      <div className="mt-2 lg:mt-20 flex-1">
         <ul>
           {navbarOptions.map(({ id, name, url, handlerName }) => (
             <NavbarItem

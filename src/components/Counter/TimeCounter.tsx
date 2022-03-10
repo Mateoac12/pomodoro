@@ -11,16 +11,16 @@ interface Props {
 const TimeCounter = ({ minutes, seconds, isWorkTime, maxTime }: Props) => {
   return (
     <div className="relative m-8">
-      <div className="relative z-40 shadow-lg bg-slate-50 flex flex-col items-center justify-center p-20 rounded-full w-96 h-96">
+      <div className="relative z-30 shadow-lg bg-slate-50 flex flex-col items-center justify-center p-20 rounded-full w-72 h-72 lg:w-96 lg:h-96">
         <span
-          className={`text-right text-9xl ${
+          className={`text-right text-8xl lg:text-9xl ${
             isWorkTime ? 'text-orange-400' : 'text-green-500'
           }`}
         >
           {toTwoDigits(minutes)}
         </span>
         <span
-          className={`text-right text-9xl ${
+          className={`text-right text-8xl lg:text-9xl ${
             isWorkTime ? 'text-orange-500' : 'text-green-600'
           }`}
         >

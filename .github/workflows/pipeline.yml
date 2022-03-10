@@ -32,8 +32,23 @@ jobs:
       - name: Check linter
         run: npm run lint
 
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install ci
+      - name: Build
+        run: npm run build
+
   deploy:
-    needs: ['linter']
+    needs: ['linter', 'build']
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
