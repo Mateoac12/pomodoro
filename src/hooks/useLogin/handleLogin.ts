@@ -16,7 +16,9 @@ export const handleLogin = () => {
   } as GoogleLoginProps)
 
   function onSuccess(res: GoogleLoginResponse) {
-    const { profileObj, tokenId } = res
+    const { profileObj, tokenId, tokenObj } = res
+    const loginHint = tokenObj.login_hint
+
     const { name, imageUrl, email } = profileObj
 
     const userData = {
@@ -24,6 +26,7 @@ export const handleLogin = () => {
       imageUrl,
       email,
       tokenId,
+      loginHint
     }
 
     setUser(userData)

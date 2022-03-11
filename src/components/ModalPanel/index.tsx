@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 interface Props {
-  handleShow: Dispatch<SetStateAction<boolean>>
+  handleShow: Dispatch<SetStateAction<'config' | 'panel' | ''>>
 }
 
 const ModalPanelContent: React.FC<Props> = ({ children, handleShow }) => {
@@ -13,7 +13,7 @@ const ModalPanelContent: React.FC<Props> = ({ children, handleShow }) => {
 
     if (clickedTag === contentTagRef.current) {
       e.stopPropagation()
-      handleShow((lastValue) => !lastValue)
+      handleShow('')
     }
   }
 

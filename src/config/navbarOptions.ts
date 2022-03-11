@@ -27,7 +27,7 @@ export const navbarOptions: NavbarOptions[] = [
   {
     id: 1,
     name: 'Panel de tiempo',
-    url: '/dashboard',
+    handlerName: 'panel',
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ export const trackerOptions: TrackerOptions[] = [
     rules: [
       {
         flip: 0,
-        time: 25,
+        time: 5,
         isWorkTime: true,
       },
       {

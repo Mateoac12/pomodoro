@@ -3,6 +3,7 @@ export interface UserData {
   imageUrl: string
   email: string
   tokenId: string
+  loginHint: string
 }
 
 export interface UserLogout {

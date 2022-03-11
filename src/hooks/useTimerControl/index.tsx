@@ -7,6 +7,8 @@ import audio from 'assets/audio/alert-ding.mp3'
 import { useTimerContext } from 'hooks/useTimerContext'
 import { useTimer } from 'react-timer-hook'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { createData } from 'api/firebase/getSchedules'
+import { useLogin } from 'hooks/useLogin/useLogin'
 
 interface Props {
   playNotification?: (isWorkTime: string) => void
@@ -14,6 +16,7 @@ interface Props {
 
 export const useTimerControl = ({ playNotification }: Props = {}) => {
   const { timer, setTimer } = useTimerContext()
+  const { user } = useLogin()
   const { time, isWorkTime, maxTime, methodId } = timer
 
   const { pause, minutes, seconds, isRunning, resume, restart, hours } =
@@ -42,6 +45,21 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
   function handleChangeTimer() {
     let newTimer: any
     isLastSecond.current = true
+
+    // save data in firestore
+    const { loginHint, tokenId } = user
+    if (tokenId) {
+      const dataToDDBB = {
+        userId: tokenId,
+        uniqueId: loginHint,
+        schedules: [
+          {
+            ...timer,
+          }
+        ]
+      }
+      createData(dataToDDBB).then((res) => res)
+    }
 
     setTimer((prevStatus: any) => {
       const rules =
