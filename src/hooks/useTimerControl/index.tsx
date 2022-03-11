@@ -6,7 +6,7 @@ import { trackerOptions } from 'config/navbarOptions'
 import audio from 'assets/audio/alert-ding.mp3'
 import { useTimerContext } from 'hooks/useTimerContext'
 import { useTimer } from 'react-timer-hook'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 
 interface Props {
   playNotification?: (isWorkTime: string) => void
@@ -77,6 +77,7 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
       )
   }
 
+  // for the config manual handler
   const handleSetMehod = (methodId: number) => {
     setTimer((lastState: any) => {
       const rules = trackerOptions[methodId].rules[0]
@@ -96,6 +97,16 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
     })
     window.location.reload()
   }
+
+    useMemo(() => {
+    const lastDateRegistered: any = new Date(time)
+    const currentDate: any = new Date()
+
+    const isDiferrentDay = currentDate.getDate() !== lastDateRegistered.getDate()
+    const isPassFourHours = (currentDate - lastDateRegistered) / (60*60*1000) >= 4
+
+    if (isDiferrentDay && isPassFourHours) handleSetMehod(methodId)
+  }, [])
 
   return {
     maxTime,
