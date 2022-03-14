@@ -67,8 +67,8 @@ const SchedulePanelPage: React.FC = () => {
                   <span
                     className={`inline-block rounded-full w-3 h-3 mr-2 shadow ${
                       schedule.isWorkTime
-                        ? 'bg-green-400 shadow-green-200'
-                        : 'bg-orange-400 shadow-orange-200'
+                        ? 'bg-orange-400 shadow-orange-200'
+                        : 'bg-green-400 shadow-green-200'
                     }`}
                   ></span>
                   <p className="text-gray-600">
