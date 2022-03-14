@@ -3,7 +3,7 @@ import { handleLogout } from './handleLogout'
 
 export const useLogin = () => {
   const { signIn, user, loaded } = handleLogin()
-  const { signOut, isLogout } = handleLogout({ user })
+  const { signOut, isLogout } = handleLogout({ user } as any)
 
   return {
     loaded,

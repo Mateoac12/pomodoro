@@ -11,7 +11,11 @@ const LoginPanel = () => {
   return (
     <div className="px-2 py-4 lg:px-8 lg:py-8 border-t">
       {user && !isLogout ? (
-        <UserData name={user.name} imageUrl={user.imageUrl} signOut={signOut} />
+        <UserData
+          name={user.name as string}
+          imageUrl={user.imageUrl as string}
+          signOut={signOut}
+        />
       ) : (
         <LoginButton signIn={signIn} />
       )}

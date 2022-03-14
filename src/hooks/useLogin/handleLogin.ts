@@ -8,7 +8,7 @@ import {
 import type { UserData } from './tyles'
 
 export const handleLogin = () => {
-  const [user, setUser] = useState<null | UserData>(null)
+  const [user, setUser] = useState<Partial<UserData>>({})
   const { loaded, signIn } = useGoogleLogin({
     onSuccess,
     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
