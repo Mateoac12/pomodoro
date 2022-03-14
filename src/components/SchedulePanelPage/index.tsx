@@ -41,7 +41,6 @@ const SchedulePanelPage: React.FC = () => {
 
     const arraySchedule = Object.entries(normalizedSchedule)
 
-    console.log(arraySchedule)
     return arraySchedule
       .reverse()
       .map(([timeFormatString, arrayValues]: any) => {
@@ -103,7 +102,13 @@ const SchedulePanelPage: React.FC = () => {
         <p className="mt-4 text-2xl p-2 mb-4">Ve tu progreso</p>
       </div>
       <div className="p-2 -mt-4">
-        {schedules.length > 0 && handleGroupData(schedules)}
+        {schedules.length > 0 ? (
+          handleGroupData(schedules)
+        ) : (
+          <p className="text-gray-600 py-4 border-t">
+            Inicia sesión y comianza a ver tu progreso diario 🚀
+          </p>
+        )}
       </div>
     </motion.div>
   )
