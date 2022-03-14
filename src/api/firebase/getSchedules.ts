@@ -5,8 +5,23 @@ import { db, doc, arrayUnion, setDoc, getDoc } from './config'
 const initialCounterTime = getCounterTime(trackerOptions[0].rules[0].time)
 const initialWorkTime = trackerOptions[0].rules[0].isWorkTime
 
-const initialState = {
+interface IDataStructure {
+  userId: string
+  uniqueId: string
+  time: Date
+  isWorkTime: boolean
+  step: number
+  laps: number
+  methodId: number
+  minutes: number
+  seconds: number
+  maxTime: number
+  schedules?: any
+}
+
+const initialState: IDataStructure = {
   userId: '',
+  uniqueId: '',
   time: initialCounterTime,
   isWorkTime: initialWorkTime,
   step: 0,
@@ -17,19 +32,25 @@ const initialState = {
   maxTime: trackerOptions[0].rules[0].time,
 }
 
-export const createData = async (inialData = initialState) => {
-  const { userId, uniqueId,  schedules } = inialData
+export const createData = async (inialData: IDataStructure = initialState) => {
+  const { userId, uniqueId, schedules } = inialData
 
   const schedulesDDBB = doc(db, 'schedules', uniqueId)
-  return await setDoc(schedulesDDBB, {
-    userId,
-    schedules: arrayUnion(schedules[0])
-  }, {
-    merge: true
-  })
+  return await setDoc(
+    schedulesDDBB,
+    {
+      userId,
+      schedules: arrayUnion(schedules[0]),
+    },
+    {
+      merge: true,
+    }
+  )
 }
 
-export const getData = async (uniqueId) => {
+export const getData = async (uniqueId: string) => {
   const schedulesDDBB = doc(db, 'schedules', uniqueId)
-  return await getDoc(schedulesDDBB)
+  const data = await getDoc(schedulesDDBB)
+
+  if (data.exists()) return data.data()
 }
