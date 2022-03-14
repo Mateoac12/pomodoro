@@ -7,8 +7,7 @@ import audio from 'assets/audio/alert-ding.mp3'
 import { useTimerContext } from 'hooks/useTimerContext'
 import { useTimer } from 'react-timer-hook'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { createData } from 'api/firebase/getSchedules'
-import { useLogin } from 'hooks/useLogin/useLogin'
+import { useCreateData } from 'hooks/useCreateData'
 
 interface Props {
   playNotification?: (isWorkTime: string) => void
@@ -16,7 +15,7 @@ interface Props {
 
 export const useTimerControl = ({ playNotification }: Props = {}) => {
   const { timer, setTimer } = useTimerContext()
-  const { user } = useLogin()
+  const { createScheduleInDB } = useCreateData()
   const { time, isWorkTime, maxTime, methodId } = timer
 
   const { pause, minutes, seconds, isRunning, resume, restart, hours } =
@@ -47,19 +46,7 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
     isLastSecond.current = true
 
     // save data in firestore
-    const { loginHint, tokenId } = user
-    if (tokenId) {
-      const dataToDDBB = {
-        userId: tokenId,
-        uniqueId: loginHint,
-        schedules: [
-          {
-            ...timer,
-          }
-        ]
-      }
-      createData(dataToDDBB).then((res) => res)
-    }
+    createScheduleInDB({ timer })
 
     setTimer((prevStatus: any) => {
       const rules =
@@ -116,12 +103,14 @@ export const useTimerControl = ({ playNotification }: Props = {}) => {
     window.location.reload()
   }
 
-    useMemo(() => {
+  useMemo(() => {
     const lastDateRegistered: any = new Date(time)
     const currentDate: any = new Date()
 
-    const isDiferrentDay = currentDate.getDate() !== lastDateRegistered.getDate()
-    const isPassFourHours = (currentDate - lastDateRegistered) / (60*60*1000) >= 4
+    const isDiferrentDay =
+      currentDate.getDate() !== lastDateRegistered.getDate()
+    const isPassFourHours =
+      (currentDate - lastDateRegistered) / (60 * 60 * 1000) >= 4
 
     if (isDiferrentDay && isPassFourHours) handleSetMehod(methodId)
   }, [])
