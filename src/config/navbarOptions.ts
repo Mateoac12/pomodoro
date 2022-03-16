@@ -43,7 +43,7 @@ export const trackerOptions: TrackerOptions[] = [
     rules: [
       {
         flip: 0,
-        time: 5,
+        time: 25,
         isWorkTime: true,
       },
       {
